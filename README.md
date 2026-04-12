@@ -35,7 +35,7 @@ This project was completed as part of a TryHackMe learning module. All work refl
 
 Before cracking, it is important to identify the hash type to use the correct format.
 
-![Hash Identification](screenshots/Identifying-hashes.png)
+![Hash Identification](screenshots/identifying-hashes.png)
 
 ---
 
@@ -123,6 +123,8 @@ Weak passwords were successfully cracked using common wordlists
 Hash format identification is critical for successful cracking
 
 Different file types require specific preprocessing tools
+
+Common wordlists such as rockyou.txt remain highly effective against weak passwords.
 
 ## Challenges
 

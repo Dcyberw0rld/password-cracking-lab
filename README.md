@@ -1,75 +1,81 @@
-# password-cracking-lab-john-the-ripper
-🔹 Title
-Password Cracking Lab – John the Ripper
-🔹 Overview
 
-This project demonstrates hands-on experience using John the Ripper to crack various types of password-protected data across Windows and Linux environments.
+- Identify different hash types
+- Crack Windows and Linux authentication hashes
+- Extract and crack hashes from protected files
+- Understand password weaknesses and attack methods
 
-The lab includes cracking authentication hashes, encrypted archives, and SSH keys while highlighting security risks associated with weak password practices.
+---
 
-Objectives
+## Hash Identification
 
-Understand password cracking techniques
-Identify hash types
-Use John the Ripper with different formats
-Analyze security weaknesses in password systems
-Tools Used
+Before cracking, it is important to identify the hash type to use the correct format.
 
-John the Ripper
-RockYou Wordlist
-zip2john / rar2john / ssh2john
-unshadow
+![Hash Identification](screenshots/identifying-hashes.png)
 
-Linux (Ubuntu AttackBox)
-Methodology
+---
 
-1. Hash Identification
-Identified hash types using tools and external resources
-Used correct formats for John the Ripper
+## Cracking Windows Hashes (NTLM)
 
-📸 ![Hash Identification](screenshots/Identifying hashes![Uploading Identifying hashes.png…]()
-.png)
+Used John the Ripper to crack Windows authentication hashes.
 
-2. Cracking Basic Hashes
+```bash
+john --format=nt --wordlist=rockyou.txt hash.txt
 
-Used wordlists to crack MD5, SHA1, SHA256, and Whirlpool hashes
-john --format=raw-md5 --wordlist=rockyou.txt hash1.txt
+Cracking MD5 Hash
+john --format=raw-md5 --wordlist=rockyou.txt hash.txt
 
-📸 (Insert Screenshot Here: successful crack)
+Cracking /etc/shadow Hashes
 
-🔸 3. Windows Authentication Hashes
-Cracked NTLM hashes
-john --format=nt --wordlist=rockyou.txt ntlm.txt
+Combined passwd and shadow files, then cracked the hash.
 
-📸 (Insert Screenshot Here)
+unshadow passwd.txt shadow.txt > combined.txt
+john combined.txt --wordlist=rockyou.txt
 
-🔸 4. Linux /etc/shadow Hashes
-Combined passwd + shadow using unshadow
-Cracked SHA512 hashes
 
-📸 (Insert Screenshot Here)
 
-🔸 5. Cracking ZIP & RAR Files
-Converted files to hashes using zip2john / rar2john
-Cracked using wordlist
 
-📸 (Insert Screenshot Here)
+Cracking ZIP Files
 
-🔸 6. Cracking SSH Keys
-Used ssh2john to extract hash
-Cracked password using John
+Extracted hash using zip2john and cracked password.
 
-📸 (Insert Screenshot Here)
+zip2john file.zip > zip.hash
+john zip.hash --wordlist=rockyou.txt
 
-🔹 Findings
-Weak passwords were successfully cracked using common wordlists
-Hash format identification is critical for successful cracking
-Different file types require specific preprocessing tools
-🔹 Challenges
-Identifying correct hash formats
-File path and syntax errors
-Understanding preprocessing tools (zip2john, ssh2john)
-🔹 Lessons Learned
-Importance of strong password policies
-Risks of weak encryption and reused passwords
-Value of proper hash identification and tool usage
+
+
+
+
+
+Cracking RAR Files
+rar2john file.rar > rar.hash
+john rar.hash --wordlist=rockyou.txt
+
+
+
+
+
+
+Cracking SSH Keys
+ssh2john id_rsa > ssh.hash
+john ssh.hash --wordlist=rockyou.txt
+
+
+
+
+Key Takeaways
+Weak passwords can be cracked quickly using common wordlists
+Proper hash identification is critical before attempting to crack
+Different file types require preprocessing tools before cracking
+Password security is essential to prevent unauthorized access
+Lessons Learned
+Gained hands-on experience using John the Ripper across multiple scenarios
+Improved understanding of Linux command-line tools
+Learned how attackers exploit weak password practices
+Strengthened troubleshooting and problem-solving skills
+Challenges
+Identifying correct hash formats initially
+Understanding preprocessing steps for different file types
+Managing multiple tools and commands during the process
+Conclusion
+
+This lab provided practical experience in password cracking techniques and reinforced the importance of strong password policies. The skills developed here are directly applicable to cybersecurity and IT support roles, particularly in understanding system vulnerabilities and user security practices.

@@ -27,7 +27,8 @@ Methodology
 Identified hash types using tools and external resources
 Used correct formats for John the Ripper
 
-📸 (Insert Screenshot Here: hash identification)
+📸 ![Hash Identification](screenshots/Identifying hashes![Uploading Identifying hashes.png…]()
+.png)
 
 2. Cracking Basic Hashes
 

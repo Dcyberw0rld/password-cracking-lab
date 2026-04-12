@@ -43,7 +43,7 @@ Before cracking, it is important to identify the hash type to use the correct fo
 
 Used wordlists to crack MD5 hash
 
-[Command]  john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash1.txt  
+john --format=raw-md5 --wordlist=/usr/share/wordlists/rockyou.txt hash1.txt
  
 ![Cracking Basic Hashes (MD5)](screenshots/md5-crack.png)
 
@@ -51,72 +51,70 @@ Used wordlists to crack MD5 hash
 
 Used John the Ripper to crack Windows authentication hashes.
 
-[Command] john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt ntlm.txt
+john --format=nt --wordlist=/usr/share/wordlists/rockyou.txt ntlm.txt
 
 ![Cracking Windows Hashes (NTLM)](screenshots/ntlm-crack.png)
 
 ## Linux /etc/shadow Hashes
-Combined passwd + shadow using unshadow
-Cracked SHA512 hashes
 
-[Command] unshadow local_passwd local_shadow > unshadowed.txt
+Combined passwd and shadow files and cracked SHA512 hashes.
+
+unshadow local_passwd local_shadow > unshadowed.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt unshadowed.txt
 
 ![Linux /etc/shadow Hashes](screenshots/shadow-crack-1.png)
-
-[Command] john --wordlist=/usr/share/wordlists/rockyou.txt --format=sha512crypt unshadowed.txt
 
 ![Linux /etc/shadow Hashes](screenshots/shadow-crack-2.png)
 
 
 ## Cracking ZIP & RAR Files
-Converted files to hashes using zip2john / rar2john
-Cracked using wordlist
 
-[command] zip2john secure.zip > zip_hash.txt
+Converted ZIP file into a hash and cracked the password.
+
+zip2john secure.zip > zip_hash.txt
+john zip_hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 ![Cracking ZIP](screenshots/zip-crack-1.png)
 
-john zip.hash --wordlist=rockyou.txt
-
-[command] john –wordlist=/user/share/wordlists/rockyou.txt zip_hash.txt
-
 ![Cracking ZIP](screenshots/zip-crack-2.png)
 
-opened the contents of the zip file to read the hidden flag
+After cracking, the contents were extracted:
+
+unzip secure.zip
 
 ![Cracking ZIP](screenshots/zip-crack-3.png)
 
 ![Cracking ZIP](screenshots/zip-crack-4.png)
 
-rar2john file.rar > rar.hash
+Converted RAR file into a hash and cracked the password.
 
-[command]  rar2john secure.rar > rar_hash.txt
+rar2john secure.rar > rar_hash.txt
+john rar_hash.txt --wordlist=/usr/share/wordlists/rockyou.txt
 
 ![Cracking RAR](screenshots/rar-crack-1.png)
 
-john rar.hash --wordlist=rockyou.txt
-
-[command] john --wordlist=/user/share/wordlists/rockyou.txt rar_hash.txt
-
 ![Cracking RAR](screenshots/rar-crack-2.png)
 
-opened the contents of the zip file to read the hidden flag
+Extracted the contents after cracking:
 
-[command] unrar x -p secure.rar
+unrar x secure.rar
+
+![Cracking RAR](screenshots/rar-crack-5.png)
 
 ![Cracking RAR](screenshots/rar-crack-3.png)
 
 ![Cracking RAR](screenshots/rar-crack-4.png)
 
-
-
 ## Cracking SSH Keys
-Used ssh2john to extract hash
-Cracked password using John
 
-![Hash Identification](screenshots/ssh-crack-1.png)
+Converted SSH private key into a hash and cracked the password.
 
-![Hash Identification](screenshots/ssh-crack-2.png)
+/opt/john/ssh2john.py id_rsa > id_rsa_hash.txt
+john --wordlist=/usr/share/wordlists/rockyou.txt id_rsa_hash.txt
+
+![Cracking SSH Keys](screenshots/ssh-crack-1.png)
+
+![Cracking SSH Keys](screenshots/ssh-crack-2.png)
 
 ## Findings
 

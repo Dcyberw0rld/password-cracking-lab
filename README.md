@@ -86,15 +86,29 @@ opened the contents of the zip file to read the hidden flag
 
 ![Cracking ZIP](screenshots/zip-crack-3.png)
 
+![Cracking ZIP](screenshots/zip-crack-4.png)
+
 rar2john file.rar > rar.hash
+
+[command]  rar2john secure.rar > rar_hash.txt
+
+![Cracking RAR](screenshots/rar-crack-1.png)
 
 john rar.hash --wordlist=rockyou.txt
 
-![Hash Identification](screenshots/rar-crack-1.png)
+[command] john --wordlist=/user/share/wordlists/rockyou.txt rar_hash.txt
 
-![Hash Identification](screenshots/rar-crack-2.png)
+![Cracking RAR](screenshots/rar-crack-2.png)
 
-![Hash Identification](screenshots/rar-crack-3.png)
+opened the contents of the zip file to read the hidden flag
+
+[command] unrar x -p secure.rar
+
+![Cracking RAR](screenshots/rar-crack-3.png)
+
+![Cracking RAR](screenshots/rar-crack-4.png)
+
+
 
 ## Cracking SSH Keys
 Used ssh2john to extract hash

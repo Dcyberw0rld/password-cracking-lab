@@ -35,7 +35,7 @@ This project was completed as part of a TryHackMe learning module. All work refl
 
 Before cracking, it is important to identify the hash type to use the correct format.
 
-![Hash Identification](screenshots/identifying-hashes.png)
+![Hash Identification](screenshots/Identifying-hashes.png)
 
 ---
 
